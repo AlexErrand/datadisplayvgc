@@ -18,6 +18,8 @@
     <canvas id="spreadChart"></canvas>
 
     <script>
+        let chartInstance = null;
+
         async function fetchSpreads(pokemonName) {
             const response = await fetch(`/data?name=${encodeURIComponent(pokemonName)}`);
             const spreadPercentages = await response.json();
@@ -26,8 +28,12 @@
                 const labels = spreadPercentages.map(spread => spread.spread);
                 const data = spreadPercentages.map(spread => spread.percentage);
 
+                if (chartInstance) {
+                    chartInstance.destroy();
+                }
+
                 const ctx = document.getElementById('spreadChart').getContext('2d');
-                new Chart(ctx, {
+                chartInstance = new Chart(ctx, {
                     type: 'bar',
                     data: {
                         labels: labels,
