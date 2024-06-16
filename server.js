@@ -9,29 +9,7 @@ app.get('/', (req, res) => {
 app.get('/data', async (req, res) => {
     try {
         const data = await getJSON("2024", "05", "gen9vgc2024reggbo3", "1760");
-        if (data) {
-            const calyrexIce = data.data['Calyrex-Ice'];
-            if (calyrexIce) {
-                const spreads = calyrexIce.Spreads;
-                const totalWeight = calyrexIce.Abilities['asoneglastrier'];
-
-                const spreadPercentages = [];
-                for (const spread in spreads) {
-                    const percentage = (spreads[spread] / totalWeight) * 100;
-                    if (percentage >= 0.5) {
-                        spreadPercentages.push({ spread, percentage });
-                    }
-                }
-
-                spreadPercentages.sort((a, b) => b.percentage - a.percentage);
-
-                res.json(spreadPercentages);
-            } else {
-                res.json({ error: "Calyrex-Ice data not found." });
-            }
-        } else {
-            res.json({ error: "Failed to fetch data." });
-        }
+        res.json(data);
     } catch (error) {
         res.json({ error: error.message });
     }

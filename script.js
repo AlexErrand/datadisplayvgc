@@ -25,6 +25,7 @@ async function displayCalyrexIceDetails() {
 
     if (data) {
         const calyrexIce = data.data['Calyrex-Ice'];
+        
         if (calyrexIce) {
             const spreads = calyrexIce.Spreads;
             const totalWeight = calyrexIce.Abilities['asoneglastrier']; // Total weight
@@ -54,6 +55,20 @@ async function displayCalyrexIceDetails() {
     }
 }
 
+async function fetchPokemonNames() {
+    const data = await getJSON("2024", "05", "gen9vgc2024reggbo3", "1760");
+
+    if (data && data.data) {
+        const pokemonNames = Object.keys(data.data);
+        console.log("Pokémon Names:");
+        pokemonNames.forEach(name => {
+            console.log(name);
+        });
+    } else {
+        console.error('Error fetching Pokémon names:', data ? data.error : 'No data returned');
+    }
+}
+
+// Call the functions for testing
 displayCalyrexIceDetails();
-//console.log("Calyrex-Ice Items:");
-//console.log(JSON.stringify(calyrexIce.Items, null, 2));
+fetchPokemonNames();

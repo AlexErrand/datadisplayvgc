@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calyrex-Ice Spreads Percentages</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!--How to fix the height and width issue--> 
-    <style> 
+    <style>
         #spreadChart {
             max-width: 2000px;
             max-height: 1000px;
@@ -15,6 +14,7 @@
 </head>
 <body>
     <h1>Calyrex-Ice Spreads Percentages</h1>
+    <select id="pokemonDropdown"></select>
     <canvas id="spreadChart"></canvas>
 
     <script>
@@ -59,7 +59,28 @@
             }
         }
 
+        async function fetchPokemonNames() {
+            const response = await fetch('/data');
+            const data = await response.json();
+
+            if (data && data.data) {
+                const pokemonNames = Object.keys(data.data);
+                const dropdown = document.getElementById('pokemonDropdown');
+                dropdown.innerHTML = '<option value="">Select a Pokémon</option>';
+
+                pokemonNames.forEach(name => {
+                    const option = document.createElement('option');
+                    option.value = name;
+                    option.textContent = name;
+                    dropdown.appendChild(option);
+                });
+            } else {
+                console.error('Error fetching Pokémon names:', data.error);
+            }
+        }
+
         fetchSpreads();
+        fetchPokemonNames();
     </script>
 </body>
 </html>
