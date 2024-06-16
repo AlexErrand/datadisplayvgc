@@ -5,10 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calyrex-Ice Spreads Percentages</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!--How to fix the height and width issue--> 
+    <style> 
+        #spreadChart {
+            max-width: 2000px;
+            max-height: 1000px;
+        }
+    </style>
 </head>
 <body>
     <h1>Calyrex-Ice Spreads Percentages</h1>
-    <canvas id="spreadChart" width="400" height="200"></canvas>
+    <canvas id="spreadChart"></canvas>
 
     <script>
         async function fetchSpreads() {
@@ -33,9 +40,16 @@
                         }]
                     },
                     options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
                         scales: {
                             y: {
                                 beginAtZero: true
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
                             }
                         }
                     }
