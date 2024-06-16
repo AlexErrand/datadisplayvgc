@@ -19,7 +19,6 @@
 
     <script>
         let chartInstance = null;
-
         async function fetchSpreads(pokemonName) {
             const response = await fetch(`/data?name=${encodeURIComponent(pokemonName)}`);
             const spreadPercentages = await response.json();
