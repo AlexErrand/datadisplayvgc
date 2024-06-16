@@ -33,6 +33,7 @@ app.get('/data', async (req, res) => {
                 const spreads = pokemonData.Spreads;
                 const abilities = pokemonData.Abilities;
                 const totalWeight = Object.values(abilities).reduce((sum, weight) => sum + weight, 0);
+                
                 const spreadPercentages = [];
                 for (const spread in spreads) {
                     const percentage = (spreads[spread] / totalWeight) * 100;
