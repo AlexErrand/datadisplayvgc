@@ -24,11 +24,11 @@ async function displayCalyrexIceDetails() {
     const data = await getJSON("2024", "05", "gen9vgc2024reggbo3", "1760");
 
     if (data) {
-        const calyrexIce = data.data['Calyrex-Ice'];
+        const calyrexIce = data.data['Tornadus'];
         
         if (calyrexIce) {
             const spreads = calyrexIce.Spreads;
-            const totalWeight = calyrexIce.Abilities['asoneglastrier']; // Total weight
+            const totalWeight = calyrexIce.Abilities['']; // Total weight
 
             // Calculate percentages
             const spreadPercentages = [];

@@ -17,7 +17,7 @@ app.get('/data2', async (req, res) => {
     }
 });
 
-// Endpoint to fetch and process Calyrex-Ice spread data
+// Endpoint to fetch and process Pokemon spread data
 app.get('/data', async (req, res) => {
     const pokemonName = req.query.name;
     if (!pokemonName) {
@@ -31,8 +31,8 @@ app.get('/data', async (req, res) => {
             const pokemonData = data.data[pokemonName];
             if (pokemonData) {
                 const spreads = pokemonData.Spreads;
-                const totalWeight = pokemonData.Abilities[Object.keys(pokemonData.Abilities)[0]];
-
+                const abilities = pokemonData.Abilities;
+                const totalWeight = Object.values(abilities).reduce((sum, weight) => sum + weight, 0);
                 const spreadPercentages = [];
                 for (const spread in spreads) {
                     const percentage = (spreads[spread] / totalWeight) * 100;
