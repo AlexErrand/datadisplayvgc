@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calyrex-Ice Spreads Percentages</title>
+    <title>Pokémon Spreads Percentages</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         #spreadChart {
@@ -13,13 +13,13 @@
     </style>
 </head>
 <body>
-    <h1>Calyrex-Ice Spreads Percentages</h1>
+    <h1>Pokémon Spreads Percentages</h1>
     <select id="pokemonDropdown"></select>
     <canvas id="spreadChart"></canvas>
 
     <script>
-        async function fetchSpreads() {
-            const response = await fetch('/data');
+        async function fetchSpreads(pokemonName) {
+            const response = await fetch(`/data?name=${encodeURIComponent(pokemonName)}`);
             const spreadPercentages = await response.json();
 
             if (Array.isArray(spreadPercentages)) {
@@ -60,7 +60,7 @@
         }
 
         async function fetchPokemonNames() {
-            const response = await fetch('/data');
+            const response = await fetch('/data2');
             const data = await response.json();
 
             if (data && data.data) {
@@ -74,12 +74,18 @@
                     option.textContent = name;
                     dropdown.appendChild(option);
                 });
+
+                dropdown.addEventListener('change', () => {
+                    const selectedPokemon = dropdown.value;
+                    if (selectedPokemon) {
+                        fetchSpreads(selectedPokemon);
+                    }
+                });
             } else {
                 console.error('Error fetching Pokémon names:', data.error);
             }
         }
 
-        fetchSpreads();
         fetchPokemonNames();
     </script>
 </body>
