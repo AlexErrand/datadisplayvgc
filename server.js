@@ -83,3 +83,48 @@ async function getJSON(Year, Month, Format, Rating) {
     const json = await fetchAPI(url);
     return json;
 }
+
+/*
+function updateSprites() {
+    // Get all the div elements with the class "pokemon"
+    var pokemonDivs = document.querySelectorAll(".pokemon");
+
+    // Loop through each div element
+    pokemonDivs.forEach(function (div) {
+        // Get the data attributes for data-number and data-form
+        var dataNumber = div.getAttribute("data-number");
+        var dataForm = div.getAttribute("data-form");
+        var imgElement = div.querySelector("img");
+
+        // Create a new img link based on data-number and data-form
+        if (dataNumber == null) {
+            // this is the sprites from the "Show Team List"
+            // existing link looks like: https://storage.googleapis.com/files.rk9labs.com/sprites/broadcast/987_000.png
+            var existingImgUrl = imgElement.src;
+            var url = new URL(existingImgUrl);
+            var pathParts = url.pathname.split('/');
+            // 987_000.png
+            var fileName = pathParts[pathParts.length - 1];
+            // 987_000
+            var fileNameWithoutExtension = fileName.replace(/\.[^/.]+$/, "");
+
+            // Extract the numeric part
+            var parts = fileNameWithoutExtension.split("_");
+            dataNumber = parts[0];
+            // default to 000 if rk9 doesn't provide us the form
+            dataForm = parts.length > 1 ? parts[1] : "000";
+        }
+
+        var newImgLink = "https://www.serebii.net/scarletviolet/pokemon/new/" + dataNumber + ".png";
+
+        var index = dataNumber + "_" + dataForm;
+        if (spritesLink[index])
+            newImgLink = spritesLink[index];
+
+        // Reset the margin height for the img
+        imgElement.src = newImgLink;
+        imgElement.style.margin = "12"; // Set margin to 12px
+        imgElement.style.height = "128px"; // Set height to 128px
+    });
+}
+*/

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,9 +13,11 @@
         }
     </style>
 </head>
+
 <body>
     <h1>Pokémon Spreads Percentages</h1>
     <select id="pokemonDropdown"></select>
+    <img id="pokemonSprite" src="" alt="Pokémon Sprite" style="display: none; max-height: 200px;" />
     <canvas id="spreadChart"></canvas>
 
     <script>
@@ -59,6 +62,13 @@
                         }
                     }
                 });
+
+                // Update the Pokémon sprite
+                const pokemonSprite = document.getElementById('pokemonSprite');
+                //needs to be fixed to map pokedex numbers to list of mons to pull from serebii
+                const spriteUrl = `https://www.serebii.net/pokedex-sv/icon/new/189.png`;
+                pokemonSprite.src = spriteUrl;
+                pokemonSprite.style.display = 'block';
             } else {
                 console.error('Error fetching data:', spreadPercentages.error);
             }
@@ -69,7 +79,7 @@
             const data = await response.json();
 
             if (data && data.data) {
-                const pokemonNames = Object.keys(data.data);
+                const pokemonNames = Object.keys(data.data).sort();
                 const dropdown = document.getElementById('pokemonDropdown');
                 dropdown.innerHTML = '<option value="">Select a Pokémon</option>';
 
@@ -94,4 +104,5 @@
         fetchPokemonNames();
     </script>
 </body>
+
 </html>
